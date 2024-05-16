@@ -33,6 +33,10 @@
     sendBtn.addEventListener("click", (e) => {
       const name = nameInput.value;
       const message = messageInput.value;
+      if (!name || !message) {
+        alert("Please enter both your name and a message.");
+        return; // Exit the function early if either field is empty
+      }
       socket.emit("chating-message", { name, message });
       messageInput.value = ""; 
     });
