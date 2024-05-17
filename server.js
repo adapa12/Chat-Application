@@ -26,16 +26,14 @@ const app = express();
 
 
 // Enable CORS for all routes and methods
-app.use(cors({
-  origin: 'http://localhost:3000', // Replace with your frontend URL
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type']
-}));
+
+app.use(cors()); // Allows all origins
 
 const server = http.createServer(app);
 const io = new Server(server, {
+  path: "/pathToConnection",
   cors: {
-    origin: "http://localhost:3000", // Replace with your frontend URL
+    origin: "*", // Allows all origins
     methods: ["GET", "POST"]
   }
 });
@@ -47,8 +45,5 @@ io.on("connection", (socket) => {
   });
 });
 
-// If you still have static files to serve for other purposes, use the following line
-// app.use(express.static(path.resolve("./src")));
 
-// Start the server on port 5000
 server.listen(5000, () => console.log(`Server Started at PORT: 5000`));
