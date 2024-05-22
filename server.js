@@ -54,7 +54,11 @@ const server = app.listen(port, () => {
 });
 
 const io = require('socket.io')(server, {
-  path: "/pathToConnection"
+  path: "/pathToConnection",
+    cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
 });
 
 io.on("connection", async (socket) => {
